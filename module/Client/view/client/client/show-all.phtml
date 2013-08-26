@@ -1,0 +1,47 @@
+<?php	
+	$clients = array();
+	foreach($this->allClients as $client) {
+		array_push($clients, $client);
+	}
+
+    $attrs = array("clientId", "First Name", "Last Name");
+
+?>
+
+<table class='table'> 
+  <thead>
+    <tr>
+      <?php
+      foreach($attrs as $key) {
+        echo "<th>" . $key . "</th>";
+      }
+      ?>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+    foreach($clients as $tmp_client) {
+      	echo "<tr>";
+    ?>
+    <td><a href="#" onClick="showClientSubmit('<?php echo $tmp_client->getClientId();?>')"> <?php echo $tmp_client->getClientId(); ?> </a></td>
+    <td><a href="#" onClick="showClientSubmit('<?php echo $tmp_client->getClientId();?>')"> <?php echo ucfirst($tmp_client->getFirstName()); ?> </a></td>
+    <td><a href="#" onClick="showClientSubmit('<?php echo $tmp_client->getClientId();?>')"> <?php echo ucfirst($tmp_client->getLastName()); ?> </a></td>
+    
+    <?php
+    	echo "</tr>";
+    }
+    ?>
+  </tbody>
+</table>
+
+<form method="post" id="clientShowForm" action="clients/Client/show" class="hidden">
+	<input id="clientIdInput" type="hidden" name="clientId"/>
+	<input type="submit" name="submitbtn"/>
+</form>
+
+<script> 
+function showClientSubmit(id) {
+	$("#clientIdInput").val(id);
+	$("#clientShowForm").submit();
+}
+</script>

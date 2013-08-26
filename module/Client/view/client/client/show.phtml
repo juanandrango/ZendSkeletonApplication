@@ -1,0 +1,71 @@
+<?php
+  $client = $this->client;
+  $client_html =  $client->getLastName() . ", " . $client->getFirstName();
+  $client_status_html = "Pending";
+  $form = $this->form;
+  $form->prepare();
+  $form->setAttribute('action', 'edit');
+  $form->setAttribute('method', 'post');
+  $form->setAttribute('class', 'form-horizontal');
+
+  $fields = array(
+    "firstName", 
+    "lastName", 
+    "stateId", 
+    "status",
+    "phoneHome", 
+    "phoneWork", 
+    "phoneReference", 
+    "phoneCell", 
+    "addressHome", 
+    "addressWork"
+    );
+?>
+
+<h2> <?php echo ucwords($client_html); ?> <small> <?php echo $client_status_html;?></small> </h2>
+<div class='tabbable'>
+  <ul class='nav nav-tabs'>
+    <li class='active'><a href='#client_info' data-toggle='tab'> Informacion</a></li>
+  </ul>
+  
+  <div class='tab-content'>
+    
+    <div class='tab-pane active' id='client_info'>
+    <?php
+    echo $this->form()->openTag($form);
+    // foreach($fields as $field) {
+    //     echo "<div class='control-group'> <label class='control-label'><strong>";
+    //     echo $this->formLabel($form->get($field));
+    //     echo "</strong></label><div class='controls'>";
+    //     echo $this->formInput($form->get($field));
+    //     echo "</div>";
+    //     echo $this->formElementErrors($form->get($field));
+    //     echo "</div>";
+    // }
+    echo $this->formCollection($form);
+    ?>
+    <div class='form-actions'>
+        <button type='submit' class='btn btn-primary'> Actualizar </button>
+    </div> 
+    <?php
+    echo $this->form()->closeTag($form);
+    ?>
+    </div>    
+  </div>
+</div>
+
+<script>
+
+$("label span").each(function() {
+    var $this = $(this);
+    $this.replaceWith($("<label class='control-label'><strong>" + $this.html() + "</strong></label>"));
+});
+
+$("div label").each(function() {
+    var $this = $(this);
+    $this.replaceWith($("<div class='control-group'>" + $this.html() + "</div>"));
+});
+
+$('input').wrap('<div class="controls" />');
+
+</script>
