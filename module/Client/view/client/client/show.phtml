@@ -4,22 +4,9 @@
   $client_status_html = "Pending";
   $form = $this->form;
   $form->prepare();
-  $form->setAttribute('action', 'edit');
+  $form->setAttribute('action', '/clients/Client/edit');
   $form->setAttribute('method', 'post');
   $form->setAttribute('class', 'form-horizontal');
-
-  $fields = array(
-    "firstName", 
-    "lastName", 
-    "stateId", 
-    "status",
-    "phoneHome", 
-    "phoneWork", 
-    "phoneReference", 
-    "phoneCell", 
-    "addressHome", 
-    "addressWork"
-    );
 ?>
 
 <h2> <?php echo ucwords($client_html); ?> <small> <?php echo $client_status_html;?></small> </h2>
@@ -33,22 +20,15 @@
     <div class='tab-pane active' id='client_info'>
     <?php
     echo $this->form()->openTag($form);
-    // foreach($fields as $field) {
-    //     echo "<div class='control-group'> <label class='control-label'><strong>";
-    //     echo $this->formLabel($form->get($field));
-    //     echo "</strong></label><div class='controls'>";
-    //     echo $this->formInput($form->get($field));
-    //     echo "</div>";
-    //     echo $this->formElementErrors($form->get($field));
-    //     echo "</div>";
-    // }
     echo $this->formCollection($form);
     ?>
+    <input type="hidden" name="clientId" value="<?php echo $client->getClientId(); ?>"/>
     <div class='form-actions'>
         <button type='submit' class='btn btn-primary'> Actualizar </button>
+        <button type='submit' class='btn btn-danger' formaction="/clients/Client/delete"> Delete </button>
     </div> 
     <?php
-    echo $this->form()->closeTag($form);
+        echo $this->form()->closeTag($form);
     ?>
     </div>    
   </div>

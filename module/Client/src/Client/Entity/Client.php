@@ -36,6 +36,7 @@ class Client {
     * @ORM\Column(type="string", unique=true, length=10) 
     * @Annotation\Attributes({"type":"text"})
     * @Annotation\Options({"label":"State Id:"})
+    * @Annotation\Validator({"name":"Regex", "options":{"pattern":"/^[0-9]{10}$/"}})
     */
     protected $stateId;
 
@@ -50,6 +51,7 @@ class Client {
     * @ORM\Column(type="string", nullable=true, length=10) 
     * @Annotation\Attributes({"type":"text"})
     * @Annotation\Options({"label":"House Phone #:"})
+    * @Annotation\Validator({"name":"Regex", "options":{"pattern":"/^[0-9]{10}$/"}})
     */
     protected $phoneHome;
 
@@ -57,6 +59,7 @@ class Client {
     * @ORM\Column(type="string", nullable=true, length=10) 
     * @Annotation\Attributes({"type":"text"})
     * @Annotation\Options({"label":"Work Phone #:"})
+    * @Annotation\Validator({"name":"Regex", "options":{"pattern":"/^[0-9]{10}$/"}})
     */
     protected $phoneWork;
 
@@ -64,6 +67,7 @@ class Client {
     * @ORM\Column(type="string", nullable=true, length=10) 
     * @Annotation\Attributes({"type":"text"})
     * @Annotation\Options({"label":"Reference Phone #:"})
+    * @Annotation\Validator({"name":"Regex", "options":{"pattern":"/^[0-9]{10}$/"}})
     */
     protected $phoneReference;
 
@@ -71,6 +75,7 @@ class Client {
     * @ORM\Column(type="string", nullable=true, length=10) 
     * @Annotation\Attributes({"type":"text"})
     * @Annotation\Options({"label":"Cell Phone #:"})
+    * @Annotation\Validator({"name":"Regex", "options":{"pattern":"/^[0-9]{10}$/"}})    
     */
     protected $phoneCell;
 
@@ -165,8 +170,7 @@ class Client {
    	public function setAddressWork($aw) {
    		$this->addressWork = $aw;
    	}
-   	public function setTimeStamp($ts) {
-   		$this->timeStamp = $ts;
+   	public function setTimeStamp() {
+        $this->timeStamp = new \DateTime("now");
    	}
-
 }

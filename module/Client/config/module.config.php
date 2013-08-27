@@ -36,15 +36,16 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'default' => array(
+                    'Client' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/[:controller[/:action]]',
+                            'route'    => '/Client[/:action][/:clientId]',
                             'constraints' => array(
-                                'controller' => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                'action'     => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                'clientId'  => '[0-9]*'
                             ),
                             'defaults' => array(
+                                'action'        => 'showAll',
                             ),
                         ),
                     ),
